@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Get the name of the input C file.
+CFILE=$1
+
+# Get the name of the output file.
+OUTPUT_FILE=$2
+
+# If the output file is not specified, use the input file name with a .i extension.
+if [ -z "$OUTPUT_FILE" ]; then
+    OUTPUT_FILE="$CFILE.i"
+fi
+
+# Run the C preprocessor on the input file and save the result to the output file.
+gcc -E "$CFILE" -o "$OUTPUT_FILE"
+
+# Check if the preprocessed file was successfully created.
+if [ ! -f "$OUTPUT_FILE" ]; then
+    echo "Error: Preprocessed file '$OUTPUT_FILE' was not created."
+    exit 1
+fi
+
+# Success!
+echo "Preprocessed file '$OUTPUT_FILE' created successfully."
